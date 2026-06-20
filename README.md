@@ -47,7 +47,7 @@ jupyter notebook notebooks/
 Or simply click the "Open in Colab" badge above.
 
 ## Key Insights
-- **Gender Preferences**: Males strongly favor **Strength** training and **HIIT**, while females prefer **Cardio** and **Yoga**.
+- **Gender Preferences**: Males strongly favor **Strength** training and High Intensity Interval Training ( **HIIT**), while females prefer **Cardio** and **Yoga**.
 - **Intensity (Calories Per Minute)**: Young adults (18-34) show the highest intensity, especially males.
 - **Statistical Significance**:
   - Chi-square test confirmed a strong association between gender and workout type preference (**p < 0.05**).
