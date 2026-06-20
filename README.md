@@ -43,9 +43,8 @@ pip install -r requirements.txt
 
 # 3. Launch Jupyter Notebook
 jupyter notebook notebooks/
-
-Or simply click the "Open in Colab" badge above.
 ```
+Or simply click the "Open in Colab" badge above.
 
 ## Key Insights
 - **Gender Preferences**: Males strongly favor **Strength** training and **HIIT**, while females prefer **Cardio** and **Yoga**.
