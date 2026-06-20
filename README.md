@@ -13,10 +13,10 @@ Explore how workout type preferences and calorie burn intensity vary by **gender
 - What patterns emerge that could inform personalized fitness recommendations?
 
 ## Tech Stack
-- **Python**  
-- **pandas** – data cleaning & manipulation  
-- **seaborn + matplotlib** – visualization  
-- **scipy** – statistical testing  
+- **Python**
+- **pandas** – data cleaning & manipulation
+- **seaborn + matplotlib** – visualization
+- **scipy** – statistical testing
 
 ## Repository Structure
 workout-data-analysis/
