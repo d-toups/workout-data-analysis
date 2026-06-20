@@ -19,17 +19,20 @@ Explore how workout type preferences and calorie burn intensity vary by **gender
 - **scipy** – statistical testing
 
 ## Repository Structure
+```text
 workout-data-analysis/
 ├── notebooks/
-│   └── workout_data_eda.ipynb          ← Main analysis notebook
+│   └── workout_data_eda.ipynb                 ← Main analysis notebook
 ├── src/
-│   └── workout_data_analysis.py        ← Python script version
-├── data/
+│   └── workout_data_analysis.py               ← Clean Python script version
+├── data/                                      ← Raw and processed datasets
 ├── reports/
-│   └── figures/                        ← Saved visualizations
+│   └── figures/                               ← Exported visualizations
 ├── requirements.txt
 ├── README.md
-└── LICENSE
+├── LICENSE
+└── .gitignore
+```
 
 ## How to Run
 
