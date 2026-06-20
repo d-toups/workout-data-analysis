@@ -32,13 +32,39 @@ workout-data-analysis/
 └── LICENSE
 
 ## How to Run
+
 ```bash
-# 1. Clone the repo
+# 1. Clone the repository
 git clone https://github.com/d-toups/workout-data-analysis.git
 cd workout-data-analysis
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Open the notebook
+# 3. Launch Jupyter Notebook
 jupyter notebook notebooks/
+
+Or simply click the "Open in Colab" badge above.
+```
+
+## Key Insights
+- **Gender Preferences**: Males strongly favor **Strength** training and **HIIT**, while females prefer **Cardio** and **Yoga**.
+- **Intensity (Calories Per Minute)**: Young adults (18-34) show the highest intensity, especially males.
+- **Statistical Significance**:
+  - Chi-square test confirmed a strong association between gender and workout type preference (**p < 0.05**).
+  - Males have significantly higher calories per minute than females (independent t-test).
+
+## Conclusions & Business Recommendations
+- Fitness platforms should personalize workout suggestions based on **gender + age**.
+- Gyms can optimize class schedules (e.g., more Strength/HIIT for young males, more Cardio/Yoga for females).
+- Age-based intensity expectations can improve goal setting in wellness apps.
+
+## Limitations
+- Small senior sample size (only 15 records, all age 65) → potential selection bias.
+- Dataset likely comes from self-reported/app-tracked workouts (may over-represent motivated individuals).
+
+## Future Work
+- Statistical power analysis and more robust testing
+- Predictive modeling for calorie burn
+- Interactive dashboard (Streamlit / Plotly Dash)
+- Expand dataset with more diverse age groups
