@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import chi2_contingency, ttest_ind, f_oneway
 import warnings; warnings.filterwarnings('ignore')
 
 ################### Function Definition #######################################
@@ -37,16 +38,16 @@ Outputs: df - cleaned dataset to be analyzed
 def clean_dataset(df):
     # Check for and remove missing values
     print('\nCheck null values:\n', df.isna().sum())
-    df.dropna()
+    df = df.dropna()
     
     # Clean strings to title format
-    df.columns = df.columns.str.title()
-    df.columns = df.columns.str.replace("_", ' ')
+    df.columns = [col.title().replace("_", " ") for col in df.columns]
     df['Gender'] = df.Gender.str.title()
     
     # We want to keep the HIIT elements uppercase, all others title case
-    df['Workout Type'].apply( lambda x: x.upper() if x.isupper() else \
-                             x.title())
+    df['Workout Type'] = df['Workout Type'].apply( lambda x: x.upper() if \
+                                                  str(x).isupper() else \
+                                                  x.title())
     
     # Add calories per minute feature
     df['Calories Per Minute'] = df['Calories Burned'] / df[\
@@ -73,6 +74,7 @@ def clean_dataset(df):
                                                             'Gender'].unique())
     print('\nWorkout Type values: ', df['Workout Type'].unique())
     df_adults = df[df['Age Group'] != 'Seniors']
+    
     return df, df_male, df_female, df_adults
 
 """ Explore Dataset ***********************************************************
@@ -106,8 +108,7 @@ def explore_dataset(df, gender):
         ax.get_figure().suptitle('')
         plt.title(f'{gender} {col} Quartiles')
         plt.ylabel(f'{col}')
-        plt.figure()
-        ax.plot
+        plt.show()
         
         # Plot densities
         print(f'\n{gender} {col} Age Group Statistics:\n', \
@@ -116,13 +117,13 @@ def explore_dataset(df, gender):
         ax = df.groupby('Age Group', observed=True)[col].plot(\
                 kind='density', title=f'{gender} {col} Density', legend=True)
         plt.xlabel(f'{col}')
-        plt.figure()
-        ax.plot
+        plt.tight_layout()
+        plt.show()
     
     # Print statistics for workout type preferences (visualized in
     # create_visualizations function)
-    print(f'\n{gender} Workout Type Statistics:\n', df.groupby('Age Group')\
-          ['Workout Type'].value_counts())
+    print(f'\n{gender} Workout Type Preference (%):\n', df.groupby('Age Group')\
+          ['Workout Type'].value_counts(normalize=True)*100, '\n')
         
     return
 
@@ -154,8 +155,7 @@ def create_visualizations(df, gender, df_a):
     plt.xticks(rotation=45)
     plt.legend(bbox_to_anchor=(0.95, -0.01), loc='lower right')
     plt.tight_layout()
-    plt.figure()
-    ax.plot()
+    plt.show()
     
     # Plot distribution of Calories per minute for Age Groups
     p = sns.displot(
@@ -168,6 +168,8 @@ def create_visualizations(df, gender, df_a):
         edgecolor='white'
     )
     p.figure.suptitle(f'{gender} Calories Per Minute Density')
+    plt.tight_layout()
+    plt.show()
     
     # Plot distribution of Calories per minute
     p = sns.displot(
@@ -180,8 +182,42 @@ def create_visualizations(df, gender, df_a):
         edgecolor='white'
     )
     p.figure.suptitle(f'{gender} Calories Per Minute Density')
+    plt.tight_layout()
+    plt.show()
     
-    plt.figure()
+    return
+
+""" Stats *********************************************************************
+Purpose: Run statistical testing to find correlations in the dataset.
+
+Inputs: df - dataframe containing dataset
+    
+Outputs: Generates chi-square and T-test results and delivers determination 
+of any associations within the dataset.
+----------------------------------------------------------------------------"""
+
+def stats(df):
+    print("*"*16, 'Statistical Testing', "*"*16)
+    
+    # Chi-Square Test
+    print("\n1. Chi-Square Test: Workout Type vs Gender")
+    contingency = pd.crosstab(df['Workout Type'], df['Gender'])
+    chi2, p, dof, expected = chi2_contingency(contingency)
+    print(f"Chi-square statistic: {chi2:.4f}")
+    print(f"p-value: {p:.6f}")
+    print("→ Significant association between Gender and Workout Preference" \
+          if p < 0.05 else "→ No significant association")
+    
+    # T-Test for Calories Per Minute
+    print("\n2. T-Test: Calories Per Minute by Gender")
+    male_cpm = df[df['Gender'] == 'Male']['Calories Per Minute']
+    female_cpm = df[df['Gender'] == 'Female']['Calories Per Minute']
+    
+    t_stat, p_val = ttest_ind(male_cpm, female_cpm, equal_var=False)
+    print(f"T-statistic: {t_stat:.4f}")
+    print(f"p-value: {p_val:.6f}")
+    print("→ Males have significantly higher intensity" if p_val < 0.05 \
+          else "→ No significant difference")
     
     return
 
@@ -197,3 +233,4 @@ print('\n********************** Females ***********************')
 explore_dataset(df_female, 'Female')
 create_visualizations(df_male, 'Male', df_adults)
 create_visualizations(df_female, 'Female', df_adults)
+stats(df)
