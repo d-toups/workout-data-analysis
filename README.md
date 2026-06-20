@@ -1,39 +1,44 @@
-# Workout Data Analysis: Preferences and Calorie Burn by Gender & Age
+# Workout Data Analysis: Gender & Age Differences in Fitness Preferences & Calorie Burn
 
-Exploratory data analysis of workout preferences and calorie expenditure using seaborn. The project examines how gender and age cohorts influence workout type preferences and calorie burn rates.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Z2Zam_9rwGqDvOR6YE06Fj4Zea51iGgE)
 
-## Project Goal
-Understand behavioral patterns in fitness data to identify differences in workout preferences and energy expenditure across demographics.
+**Exploratory Data Analysis** of workout preferences and calorie expenditure across gender and age groups.
 
-## Dataset
-- **Source**: [Add source here — Kaggle? Course-provided?]
-- Features analyzed: Gender, Age groups, Workout type, Calorie burn, etc.
+## Project Objective
+Explore how workout type preferences and calorie burn intensity vary by **gender** and **age group** to derive actionable insights for fitness apps, gyms, and wellness platforms.
 
-## Key Insights
-(Add 3–5 bullet points of your main findings here)
-- Example: Males tend to prefer strength training while females prefer cardio...
-- Younger age groups (18-25) show higher calorie burn in HIIT compared to older cohorts.
+## Key Business Questions
+- Do men and women prefer different workout types?
+- How does workout intensity (calories per minute) differ by gender and age?
+- What patterns emerge that could inform personalized fitness recommendations?
 
 ## Tech Stack
-- Python
-- pandas
-- seaborn + matplotlib
-- Jupyter Notebook
+- **Python**  
+- **pandas** – data cleaning & manipulation  
+- **seaborn + matplotlib** – visualization  
+- **scipy** – statistical testing  
 
 ## Repository Structure
+workout-data-analysis/
 ├── notebooks/
-│   └── workout_data_analysis.ipynb
+│   └── workout_data_eda.ipynb          ← Main analysis notebook
 ├── src/
-│   └── workout_analysis.py
+│   └── workout_data_analysis.py        ← Python script version
 ├── data/
-├── reports/figures/
+├── reports/
+│   └── figures/                        ← Saved visualizations
 ├── requirements.txt
 ├── README.md
 └── LICENSE
 
 ## How to Run
 ```bash
+# 1. Clone the repo
 git clone https://github.com/d-toups/workout-data-analysis.git
 cd workout-data-analysis
+
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Open the notebook
 jupyter notebook notebooks/
