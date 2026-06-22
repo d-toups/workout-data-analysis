@@ -1,22 +1,22 @@
 # Workout Data Analysis: Gender & Age Differences in Fitness Preferences & Calorie Burn
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Z2Zam_9rwGqDvOR6YE06Fj4Zea51iGgE)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/14pcN7JquS_n7Ydf5GZy8UZV7MxNn0HkY)
 
-**Exploratory Data Analysis** of workout preferences and calorie expenditure across gender and age groups.
+**Exploratory Data Analysis** of workout preferences and calorie expenditure patterns across gender and age groups.
 
 ## Project Objective
-Explore how workout type preferences and calorie burn intensity vary by **gender** and **age group** to derive actionable insights for fitness apps, gyms, and wellness platforms.
+Analyze how **workout type preferences** and **training intensity** (Calories Per Minute) vary by gender and age group to derive actionable insights for fitness apps, gyms, and wellness platforms.
 
 ## Key Business Questions
-- Do men and women prefer different workout types?
-- How does workout intensity (calories per minute) differ by gender and age?
-- What patterns emerge that could inform personalized fitness recommendations?
+- Do workout preferences differ significantly between males and females?
+- How does training intensity vary across age groups and genders?
+- What patterns can inform personalized fitness recommendations?
 
 ## Tech Stack
-- **Python**
-- **pandas** – data cleaning & manipulation
-- **seaborn + matplotlib** – visualization
-- **scipy** – statistical testing
+- Python
+- pandas
+- seaborn + matplotlib
+- scipy (statistical testing)
 
 ## Repository Structure
 ```text
@@ -24,49 +24,56 @@ workout-data-analysis/
 ├── notebooks/
 │   └── workout_data_eda.ipynb                 ← Main analysis notebook
 ├── src/
-│   └── workout_data_analysis.py               ← Clean Python script version
-├── data/                                      ← Raw and processed datasets
+│   └── workout_analysis.py                    ← Clean Python functions
 ├── reports/
-│   └── figures/                               ← Exported visualizations
+│   └── figures/                               ← Saved visualizations
+├── data/
 ├── requirements.txt
 ├── README.md
-├── LICENSE
-└── .gitignore
+└── LICENSE
 ```
 
 ## How to Run
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/d-toups/workout-data-analysis.git
 cd workout-data-analysis
 
-# 2. Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 3. Launch Jupyter Notebook
+# Open the notebook
 jupyter notebook notebooks/
 ```
 Or simply click the "Open in Colab" badge above.
 
 ## Key Insights
-- **Gender Preferences**: Males strongly favor **Strength** training and High Intensity Interval Training ( **HIIT**), while females prefer **Cardio** and **Yoga**.
-- **Intensity (Calories Per Minute)**: Young adults (18-34) show the highest intensity, especially males.
-- **Statistical Significance**:
-  - Chi-square test confirmed a strong association between gender and workout type preference (**p < 0.05**).
-  - Males have significantly higher calories per minute than females (independent t-test).
+- **Gender Preferences**: Males consistently prefer **Strength Training** and **HIIT**, while females show stronger preference for **Cardio** and **Yoga**.
+- **Age Patterns**: Young Adults tend to train at higher intensity (Calories Per Minute) compared to Adults across several workout types.
+- **Strength Training** shows the highest variability in intensity, particularly among males, with several high outliers suggesting diverse training efforts within this category.
+- **Notable Reversal in Females**: Adult females prefer Cardio most and Yoga least, while Young Adult females show the opposite pattern (Yoga most preferred, Cardio least).
+- **Statistical Results**: Stratified Chi-square and T-tests found **no statistically significant differences** between genders or age groups (all p-values > 0.05).
 
 ## Conclusions & Business Recommendations
-- Fitness platforms should personalize workout suggestions based on **gender + age**.
-- Gyms can optimize class schedules (e.g., more Strength/HIIT for young males, more Cardio/Yoga for females).
-- Age-based intensity expectations can improve goal setting in wellness apps.
+
+**Main Findings**  
+Visual analysis reveals clear behavioral patterns: males lean toward higher-intensity workouts (Strength Training and HIIT), while females prefer Cardio and Yoga. Young Adults also demonstrate higher training intensity compared to Adults in several categories. Strength Training stands out for its wide range of intensity, especially among males.
+
+However, statistical testing (Chi-square and T-tests) showed **no significant differences** between groups. This suggests that while visual trends are present, they are not strong enough to be considered statistically meaningful with this dataset.
+
+**Business Implications**  
+Fitness apps and gyms can use these visual patterns to offer **soft personalization** — such as recommending more Strength and Crossfit options to young males, or promoting Yoga and Cardio to females. Strong demographic-based assumptions should be made cautiously and validated with larger datasets.
+
+**Limitations**  
+- Seniors were excluded due to very small and non-representative sample size.
+- The dataset is synthetic, which may limit real-world generalizability.
+- Moderate sample size likely contributed to the non-significant statistical results.
 
 ## Limitations
 - Small senior sample size (only 15 records, all age 65) → potential selection bias.
 - Dataset likely comes from self-reported/app-tracked workouts (may over-represent motivated individuals).
 
 ## Future Work
-- Statistical power analysis and more robust testing
-- Predictive modeling for calorie burn
-- Interactive dashboard (Streamlit / Plotly Dash)
-- Expand dataset with more diverse age groups
+- Analyze a larger, real-world dataset
+- Perform regression analysis to control for multiple variables
