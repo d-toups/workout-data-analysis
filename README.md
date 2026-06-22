@@ -22,9 +22,9 @@ Analyze how **workout type preferences** and **training intensity** (Calories Pe
 ```text
 workout-data-analysis/
 ├── notebooks/
-│   └── workout_data_eda.ipynb                 ← Main analysis notebook
+│   └── workout_data_eda_02.ipynb                 ← Main analysis notebook
 ├── src/
-│   └── workout_analysis.py                    ← Clean Python functions
+│   └── workout_data_analysis_new_plots.py                    ← Clean Python functions
 ├── reports/
 │   └── figures/                               ← Saved visualizations
 ├── data/
