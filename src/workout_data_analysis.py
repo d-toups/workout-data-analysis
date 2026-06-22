@@ -215,5 +215,5 @@ plot_workout_by_age_group(df_female, 'Female')
 # 3. Plot Calories per Minute by Workout Type and Gender
 plot_cpm(df)
 
-# Conduct chi-square and t-testing on dataset
+## Conduct chi-square and t-testing on dataset
 stats(df)
