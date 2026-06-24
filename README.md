@@ -48,6 +48,17 @@ jupyter notebook notebooks/
 ```
 Or simply click the "Open in Colab" badge above.
 
+## Results Visualizations
+
+**Male Workout Preferences**
+![Male Preferences](reports/figures/male_workout_type_pref.png)
+
+**Female Workout Preferences**
+![Female Preferences](reports/figures/female_workout_type_pref.png)
+
+**Calories Burned per Minute**
+![CPM](reports/figures/cpm.png)
+
 ## Key Insights
 - **Gender Preferences**: Males consistently prefer **Strength Training** and **HIIT**, while females show stronger preference for **Cardio** and **Yoga**.
 - **Age Patterns**: Young Adults tend to train at higher intensity (Calories Per Minute) compared to Adults across several workout types.
