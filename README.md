@@ -1,16 +1,27 @@
 # Workout Data Analysis: Gender & Age Differences in Fitness Preferences & Calorie Burn
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/14pcN7JquS_n7Ydf5GZy8UZV7MxNn0HkY)
+**Exploratory Data Analysis** of workout preferences and training intensity using a real-world dataset.
 
-**Exploratory Data Analysis** of workout preferences and calorie expenditure patterns across gender and age groups.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/d-toups/workout-data-analysis/blob/main/notebooks/workout_data_eda.ipynb)
+![Python](https://img.shields.io/badge/Python-3.9+-blue)
+![Pandas](https://img.shields.io/badge/pandas-2.0+-blue)
+![Seaborn](https://img.shields.io/badge/seaborn-0.13+-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Project Objective
+
 Analyze how **workout type preferences** and **training intensity** (Calories Per Minute) vary by gender and age group to derive actionable insights for fitness apps, gyms, and wellness platforms.
 
 ## Key Business Questions
-- Do workout preferences differ significantly between males and females?
-- How does training intensity vary across age groups and genders?
+- Do workout preferences differ by gender?
+- How does training intensity vary across age groups?
 - What patterns can inform personalized fitness recommendations?
+
+## Key Results
+- Both males and females show a general preference for **Strength Training** and **Cardio**.
+- **Young Adult males** have the strongest preference for **Yoga** among all groups.
+- Young Adults (18-34) train at **significantly higher intensity** than Adults (35-59) for both genders (p < 0.001).
+- No statistically significant association between gender and workout type preference (Chi-square p-values: 0.5785 for Young Adults, 0.7021 for Adults).
 
 ## Tech Stack
 - Python
@@ -19,7 +30,7 @@ Analyze how **workout type preferences** and **training intensity** (Calories Pe
 - scipy (statistical testing)
 
 ## Repository Structure
-```text
+```bash
 workout-data-analysis/
 ├── notebooks/
 │   └── workout_data_eda.ipynb                 ← Main analysis notebook
@@ -33,7 +44,7 @@ workout-data-analysis/
 └── LICENSE
 ```
 
-## How to Run
+## How to Reproduce
 
 ```bash
 # Clone the repository
@@ -44,7 +55,7 @@ cd workout-data-analysis
 pip install -r requirements.txt
 
 # Open the notebook
-jupyter notebook notebooks/
+jupyter notebook notebooks/workout_data_eda.ipynb
 ```
 Or simply click the "Open in Colab" badge above.
 
@@ -59,27 +70,21 @@ Or simply click the "Open in Colab" badge above.
 **Calories Burned per Minute**
 ![CPM](reports/figures/cpm.png)
 
-## Key Insights
-- **Gender Preferences**: Males consistently prefer **Strength Training** and **HIIT**, while females show stronger preference for **Cardio** and **Yoga**.
-- **Age Patterns**: Young Adults tend to train at higher intensity (Calories Per Minute) compared to Adults across several workout types.
-- **Strength Training** shows the highest variability in intensity, particularly among males, with several high outliers suggesting diverse training efforts within this category.
-- **Notable Reversal in Females**: Adult females prefer Cardio most and Yoga least, while Young Adult females show the opposite pattern (Yoga most preferred, Cardio least).
-- **Statistical Results**: Stratified Chi-square and T-tests found **no statistically significant differences** between genders or age groups (all p-values > 0.05).
+## Conclusions & Key Insights
+- **Workout Preferences**: Both genders favor Strength Training and Cardio overall. Young Adult males stand out with a particularly strong preference for Yoga.
+- **Training Intensity**: Age is a much stronger driver than gender — Young Adults train significantly harder than Adults (highly significant t-tests).
+- Statistical tests confirm that while visual patterns exist, gender-based workout type differences are **not statistically significant**.
+**Business Takeaway**: Prioritize age over gender when personalizing workout **intensity**. Gender can still guide soft recommendations for workout types.
 
-## Conclusions & Business Recommendations
-**Main Findings**  
-Visual analysis reveals clear behavioral patterns: males lean toward higher-intensity workouts (Strength Training and HIIT), while females prefer Cardio and Yoga. Young Adults also demonstrate higher training intensity compared to Adults in several categories. Strength Training stands out for its wide range of intensity, especially among males.
-
-However, statistical testing (Chi-square and T-tests) showed **no significant differences** between groups. This suggests that while visual trends are present, they are not strong enough to be considered statistically meaningful with this dataset.
-
-**Business Implications**  
-Fitness apps and gyms can use these visual patterns to offer **soft personalization** — such as recommending more Strength and CrossFit options to young males, or promoting Yoga and Cardio to females. Strong demographic-based assumptions should be made cautiously and validated with larger datasets.
-
-**Limitations**  
-- Seniors were excluded due to very small and non-representative sample size.
-- The dataset is synthetic, which may limit real-world generalizability.
-- Moderate sample size likely contributed to the non-significant statistical results.
+## Limitations
+- Moderate sample size (~973 records) limits statistical power for some tests.
+- No data available for individuals aged 60+.
+- While the dataset contains additional features (BMI, workout duration, frequency, etc.), this analysis focused only on gender, age group, and workout type.
+- No multiple comparison correction was applied to the t-tests.
 
 ## Future Work
-- Analyze a larger, real-world dataset
-- Perform regression analysis to control for multiple variables
+- Explore additional features in the dataset (BMI, frequency, goals, etc.).
+- Include effect size metrics alongside p-values.
+- Perform regression analysis to understand combined effects of multiple variables.
+- Build predictive models for calorie burn or personalized recommendations.
+- Create an interactive dashboard (Streamlit / Plotly) for user segmentation.
