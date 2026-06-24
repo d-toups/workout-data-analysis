@@ -1,3 +1,8 @@
+'''
+Author: Dennis Toups
+Date: 24 June 2026
+'''
+
 ################### Imports and Setup #########################################
 # Import librabries
 import matplotlib.pyplot as plt
@@ -24,7 +29,7 @@ Outputs: df - dataset in dataframe format
 def load_dataset(filepath):
     # Use specified columns to read in Age, Gender, Workout Type, Workout
     # Duration, and Calories Burned
-    df = pd.read_csv(filepath, usecols=[2, 3, 5, 6, 7])
+    df = pd.read_csv(filepath, usecols=[0, 1, 7, 8, 9])
     return df
 
 """ Clean Dataset *************************************************************
@@ -52,19 +57,21 @@ def clean_dataset(df):
                                                   str(x).isupper() else
                                                   x.title())
     
+    # Transform Session Duration from hours to minutes, rename
+    df['Session Duration (minutes)'] = 60 * df['Session Duration (Hours)']
+    
     # Add calories per minute feature
     df['Calories Per Minute'] = df['Calories Burned'] / df[\
-                                                    'Workout Duration Minutes']
-    # Filter out 'Other' values for gender
-    df = df[df['Gender'] != 'Other']
+                                                    'Session Duration (minutes)']
+    # Filter out invalid values for gender
+    df = df[df['Gender'].isin(['Male', 'Female'])]
     
-    df = df.dropna().copy()  # Drop any real missing values first
+    df = df.dropna().copy()  # Drop any real missing values
     
-    # Create Age Group
+    # Create Age Group bins
     df['Age Group'] = pd.cut(df['Age'], 
                              bins=[17, 34, 64], 
                              labels=['Young Adult', 'Adult'])
-    
     # Remove any rows that were not binned (including 'nan')
     df = df[df['Age Group'].notna()].copy()
     
@@ -73,7 +80,7 @@ def clean_dataset(df):
     
     print(f"Final dataset shape after cleaning: {df.shape}")
 
-    # Separate by gender, retain only 'Male' and 'Female' data
+    # Separate by gender
     df_male = df[df['Gender'] == 'Male']
     df_female = df[df['Gender'] == 'Female']
     
@@ -178,6 +185,11 @@ def stats(df):
                 'p-value': round(p, 4),
                 'Significant': p < 0.05
             })
+            
+        print(f"Age Group: {age_group} ({len(subset)} samples)")
+        print(f"   Chi-square p-value: {p:.4f} → {'Significant' if \
+              p < 0.05 else 'Not significant'}")
+        print(f"   Contingency Table:\n{contingency}")
         
     # T-tests by Age Group within Gender
     for gender in ['Male', 'Female']:
@@ -194,12 +206,18 @@ def stats(df):
                 'p-value': round(p_val, 4),
                 'Significant': p_val < 0.05
             })
+            
+        print(f"Gender: {gender} ({len(subset)} total samples)")
+        print(f"   Young Adult : n={len(young)}, Mean = {young.mean():.2f}")
+        print(f"   Adult       : n={len(adult)}, Mean = {adult.mean():.2f}")
+        print(f"   p-value     : {p_val:.4f} {'→ Significant difference' if \
+              p_val < 0.05 else '→ No significant difference'}")
         
     return
 
 ################### Execution #################################################
 # Load and Clean the Dataset
-df_raw = load_dataset("daily_gym_attendance_workout_data.csv")
+df_raw = load_dataset("gym_members_exercise_tracking.csv")
 df, df_male, df_female = clean_dataset(df_raw)
 
 print(f"Dataset shape after cleaning: {df.shape}")
